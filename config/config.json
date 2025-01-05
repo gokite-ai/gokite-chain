@@ -1,0 +1,23 @@
+{
+  "database-type": "leveldb",
+  "log-level": "info",
+  "warp-api-enabled": true,
+  "eth-apis": [
+    "eth",
+    "eth-filter",
+    "net",
+    "admin",
+    "web3",
+    "internal-account",
+    "internal-blockchain",
+    "internal-debug",
+    "internal-eth",
+    "internal-personal",
+    "internal-transaction",
+    "internal-tx-pool",
+    "debug",
+    "debug-tracer",
+    "debug-file-tracer",
+    "debug-handler"
+  ]
+}

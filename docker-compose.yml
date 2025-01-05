@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  node0:
+    container_name: avalanchego-subnetevm-node0
+    image: ghcr.io/zettablock/go-kite-chain:v0.0.0-test
+    volumes:
+      - ./data:/data
+    user: "${CURRENT_UID}:${CURRENT_GID}"
+    ports:
+      - 9650:9650
+      - 9651:9651
+    environment:
+      - AVALANCHEGO_CHAIN_CONFIG_DIR=/config
+      - AVALANCHEGO_NETWORK_ID=fuji
+      - AVALANCHEGO_DATA_DIR=/data
+      - AVALANCHEGO_PLUGIN_DIR=/plugins/ 
+      - AVALANCHEGO_HTTP_PORT=9650
+      - AVALANCHEGO_STAKING_PORT=9651
+      - AVALANCHEGO_TRACK_SUBNETS=2ayt7g4JZeyL7mZNmxm4SpvxY6JHcFkv5KSLFLfV7eQiu1MEck
+      - AVALANCHEGO_HTTP_ALLOWED_HOSTS=*
+      - AVALANCHEGO_HTTP_HOST=0.0.0.0
+      - AVALANCHEGO_PUBLIC_IP_RESOLUTION_SERVICE=ifconfigme
+      - AVALANCHEGO_PARTIAL_SYNC_PRIMARY_NETWORK=true
