@@ -82,6 +82,20 @@ Once bootstrapped, the following API endpoints will be available:
 
 Monitor node health status:
 ```sh
-curl -X POST http://localhost:9650/ext/health
+curl http://localhost:9650/ext/health
 ```
 The node is ready when the response shows `"healthy": true`.
+
+## Data and Keys
+
+The data directory is located at `$(pwd)/data`.
+If you want to use a different directory, you can change the `-v "$(pwd)/data:/data"` option in the deployment command.
+
+The keys are randomly generated and stored in the directory under the `data/staking` directory.
+If you are running the node for validator, you may want to generate the keys manually and replace the existing keys.
+
+## Run the Node Manually
+
+All the configurations and commands to build the docker image are in the this repository.
+
+If you want to run the node manually without using docker, feel free to check github actions to see how to build and run the node.
