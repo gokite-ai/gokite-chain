@@ -2,8 +2,8 @@ version: '3.8'
 
 services:
   node0:
-    container_name: avalanchego-subnetevm-node0
-    image: ghcr.io/zettablock/go-kite-chain:v0.0.0-test
+    container_name: gokite-chain-node
+    image: ghcr.io/zettablock/gokite-chain:latest
     volumes:
       - ./data:/data
     user: "${CURRENT_UID}:${CURRENT_GID}"
