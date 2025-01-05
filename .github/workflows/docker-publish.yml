@@ -6,7 +6,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: zettablock/go-kite-chain
+  IMAGE_NAME: zettablock/gokite-chain
 
 jobs:
   build-and-push:
