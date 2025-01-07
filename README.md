@@ -37,7 +37,7 @@ docker run -d \
   -e AVALANCHEGO_PLUGIN_DIR=/plugins/ \
   -e AVALANCHEGO_HTTP_PORT=9650 \
   -e AVALANCHEGO_STAKING_PORT=9651 \
-  -e AVALANCHEGO_TRACK_SUBNETS=2ayt7g4JZeyL7mZNmxm4SpvxY6JHcFkv5KSLFLfV7eQiu1MEck \
+  -e AVALANCHEGO_TRACK_SUBNETS=XgNrCeD6fXTT5Z1ty8TcFzfGtateSi7yfupjaPUeoojQp6xDA \
   -e AVALANCHEGO_HTTP_ALLOWED_HOSTS="*" \
   -e AVALANCHEGO_HTTP_HOST=0.0.0.0 \
   -e AVALANCHEGO_PUBLIC_IP_RESOLUTION_SERVICE=ifconfigme \
@@ -63,7 +63,7 @@ docker run -d \
   -e AVALANCHEGO_PLUGIN_DIR=/plugins/ \
   -e AVALANCHEGO_HTTP_PORT=9650 \
   -e AVALANCHEGO_STAKING_PORT=9651 \
-  -e AVALANCHEGO_TRACK_SUBNETS=2ayt7g4JZeyL7mZNmxm4SpvxY6JHcFkv5KSLFLfV7eQiu1MEck \
+  -e AVALANCHEGO_TRACK_SUBNETS=XgNrCeD6fXTT5Z1ty8TcFzfGtateSi7yfupjaPUeoojQp6xDA \
   -e AVALANCHEGO_HTTP_ALLOWED_HOSTS="*" \
   -e AVALANCHEGO_HTTP_HOST=0.0.0.0 \
   -e AVALANCHEGO_PUBLIC_IP_RESOLUTION_SERVICE=ifconfigme \
@@ -75,8 +75,8 @@ docker run -d \
 
 Once bootstrapped, the following API endpoints will be available:
 
-- **HTTP RPC**: `http://localhost:9650/ext/bc/VNMhjeX6p7xc24K9BCAijEDoX9xpUVDnkvJFNUuCXm71XU6QU/rpc`
-- **WebSocket**: `ws://localhost:9650/ext/bc/VNMhjeX6p7xc24K9BCAijEDoX9xpUVDnkvJFNUuCXm71XU6QU/ws`
+- **HTTP RPC**: `http://localhost:9650/ext/bc/w7DLJh6sr9An1UA2aJUmL2VYBBHtKk156PbLEAdTkKU71nQ4d/rpc`
+- **WebSocket**: `ws://localhost:9650/ext/bc/w7DLJh6sr9An1UA2aJUmL2VYBBHtKk156PbLEAdTkKU71nQ4d/ws`
 
 ## Health Check
 
