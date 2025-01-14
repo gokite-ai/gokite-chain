@@ -30,7 +30,7 @@ RUN echo "Downloading subnet-evm version ${SUBNETEVM_VERSION} for ${TARGETARCH}"
 FROM debian:bookworm-slim
 
 COPY --from=avalanchego /avalanchego/build/avalanchego /usr/local/bin/avalanchego
-COPY --from=subevm_builder /subnet-evm/subnet-evm /plugins/pJhESEnvmooEgHuuEXkbNv49hwkL5M1NDrVijYoFvv4pQbpjW
+COPY --from=subevm_builder /subnet-evm/subnet-evm /plugins/pJhESDWpZttEG5zDJpoZWR14EsYdZw8JNc2xReUF35cQJCgAy
 
 ARG BLOCKCHAIN_ID
 
