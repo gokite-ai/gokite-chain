@@ -6,7 +6,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: zettablock/gokite-chain
+  IMAGE_NAME: gokite-ai/gokite-chain
 
 jobs:
   build-and-push:
@@ -44,7 +44,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           build-args: |
-            AVALANCHEGO_VERSION=1.12.1.1
+            AVALANCHEGO_VERSION=1.12.1.3
             SUBNETEVM_VERSION=0.7.0
             BLOCKCHAIN_ID=nQ9iPT7ZQQx1qwBTs68EGiU8cu1GHMMjzvYktmA3oRs4esg3V
           tags: |
@@ -63,7 +63,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           build-args: |
-            AVALANCHEGO_VERSION=1.12.1.1
+            AVALANCHEGO_VERSION=1.12.1.3
             SUBNETEVM_VERSION=0.7.0
             BLOCKCHAIN_ID=nQ9iPT7ZQQx1qwBTs68EGiU8cu1GHMMjzvYktmA3oRs4esg3V
           tags: |

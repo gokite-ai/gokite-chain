@@ -6,7 +6,7 @@
 # ==============================================================================
 ARG AVALANCHEGO_VERSION
 
-FROM ghcr.io/zettablock/avalanchego:v${AVALANCHEGO_VERSION} AS avalanchego
+FROM ghcr.io/gokite-ai/avalanchego:v${AVALANCHEGO_VERSION} AS avalanchego
 
 
 FROM debian:bookworm-slim AS subevm_builder
@@ -20,7 +20,7 @@ RUN mkdir -p /subnet-evm
 ARG TARGETARCH
 ARG SUBNETEVM_VERSION
 RUN echo "Downloading subnet-evm version ${SUBNETEVM_VERSION} for ${TARGETARCH}" && \
-    wget -O subnet-evm.tar.gz "https://github.com/zettablock/subnet-evm/releases/download/v${SUBNETEVM_VERSION}/subnet-evm_${SUBNETEVM_VERSION}_linux_${TARGETARCH}.tar.gz" && \
+    wget -O subnet-evm.tar.gz "https://github.com/gokite-ai/subnet-evm/releases/download/v${SUBNETEVM_VERSION}/subnet-evm_${SUBNETEVM_VERSION}_linux_${TARGETARCH}.tar.gz" && \
     tar -xzf subnet-evm.tar.gz -C /subnet-evm
 
 # ==============================================================================

@@ -3,7 +3,7 @@ version: '3.8'
 services:
   node0:
     container_name: gokite-chain-node
-    image: ghcr.io/zettablock/gokite-chain:latest
+    image: ghcr.io/gokite-ai/gokite-chain:latest
     volumes:
       - ./data:/data
     user: "${CURRENT_UID}:${CURRENT_GID}"

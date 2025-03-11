@@ -21,7 +21,7 @@ This repository contains configurations and setup for running Kite Chain nodes.
 
 ### Standard RPC Node
 
-Run a standard RPC node using `latest` tag in the gokite-chain's [Github Container Registry](https://github.com/Zettablock/gokite-chain/pkgs/container/gokite-chain) with:
+Run a standard RPC node using `latest` tag in the gokite-chain's [Github Container Registry](https://github.com/gokite-ai/gokite-chain/pkgs/container/gokite-chain) with:
 
 ```sh
 docker run -d \
@@ -42,12 +42,12 @@ docker run -d \
   -e AVALANCHEGO_HTTP_HOST=0.0.0.0 \
   -e AVALANCHEGO_PUBLIC_IP_RESOLUTION_SERVICE=ifconfigme \
   -e AVALANCHEGO_PARTIAL_SYNC_PRIMARY_NETWORK=true \
-  ghcr.io/zettablock/gokite-chain:latest
+  ghcr.io/gokite-ai/gokite-chain:latest
 ```
 
 ### Archive Node
 
-For historical data access and analytics, deploy an archive node using `latest-archive` tag in the gokite-chain's [Github Container Registry](https://github.com/Zettablock/gokite-chain/pkgs/container/gokite-chain) with:
+For historical data access and analytics, deploy an archive node using `latest-archive` tag in the gokite-chain's [Github Container Registry](https://github.com/gokite-ai/gokite-chain/pkgs/container/gokite-chain) with:
 
 ```sh
 docker run -d \
@@ -68,7 +68,7 @@ docker run -d \
   -e AVALANCHEGO_HTTP_HOST=0.0.0.0 \
   -e AVALANCHEGO_PUBLIC_IP_RESOLUTION_SERVICE=ifconfigme \
   -e AVALANCHEGO_PARTIAL_SYNC_PRIMARY_NETWORK=true \
-  ghcr.io/zettablock/gokite-chain:latest-archive
+  ghcr.io/gokite-ai/gokite-chain:latest-archive
 ```
 
 ## API Endpoints
