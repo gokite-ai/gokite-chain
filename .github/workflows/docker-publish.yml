@@ -44,7 +44,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           build-args: |
-            AVALANCHEGO_VERSION=1.12.1.3
+            AVALANCHEGO_VERSION=1.13.0.1
             SUBNETEVM_VERSION=0.7.0
             BLOCKCHAIN_ID=nQ9iPT7ZQQx1qwBTs68EGiU8cu1GHMMjzvYktmA3oRs4esg3V
           tags: |
@@ -63,7 +63,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           build-args: |
-            AVALANCHEGO_VERSION=1.12.1.3
+            AVALANCHEGO_VERSION=1.13.0.1
             SUBNETEVM_VERSION=0.7.0
             BLOCKCHAIN_ID=nQ9iPT7ZQQx1qwBTs68EGiU8cu1GHMMjzvYktmA3oRs4esg3V
           tags: |
