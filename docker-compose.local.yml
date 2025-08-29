@@ -3,7 +3,7 @@ version: '3.8'
 services:
   node0:
     container_name: gokite-chain-node
-    image: ghcr.io/gokite-ai/gokite-chain:latest
+    image: gokite-chain:latest
     volumes:
       - ./data:/data
       # - ./config:/config
@@ -25,3 +25,5 @@ services:
       # - KITE_CHAIN_ID=nQ9iPT7ZQQx1qwBTs68EGiU8cu1GHMMjzvYktmA3oRs4esg3V
       # - AVAGO_PLUGIN_DIR=/plugins
       # - AVAGO_TRACK_SUBNETS=
+      
+

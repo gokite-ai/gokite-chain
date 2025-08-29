@@ -9,7 +9,7 @@ ARG AVALANCHEGO_VERSION
 FROM ghcr.io/gokite-ai/avalanchego:v${AVALANCHEGO_VERSION} AS avalanchego
 
 
-FROM debian:bookworm-slim AS subevm_builder
+# FROM debian:bookworm-slim AS subevm_builder
 
 # ==============================================================================
 # SUBNET-EVM BUILDER STAGE
@@ -18,10 +18,10 @@ RUN apt-get update && apt-get install -y wget
 RUN mkdir -p /subnet-evm
 
 ARG TARGETARCH
-ARG SUBNETEVM_VERSION
-RUN echo "Downloading subnet-evm version ${SUBNETEVM_VERSION} for ${TARGETARCH}" && \
-    wget -O subnet-evm.tar.gz "https://github.com/gokite-ai/subnet-evm/releases/download/v${SUBNETEVM_VERSION}/subnet-evm_${SUBNETEVM_VERSION}_linux_${TARGETARCH}.tar.gz" && \
-    tar -xzf subnet-evm.tar.gz -C /subnet-evm
+# ARG SUBNETEVM_VERSION
+# RUN echo "Downloading subnet-evm version ${SUBNETEVM_VERSION} for ${TARGETARCH}" && \
+#     wget -O subnet-evm.tar.gz "https://github.com/gokite-ai/subnet-evm/releases/download/v${SUBNETEVM_VERSION}/subnet-evm_${SUBNETEVM_VERSION}_linux_${TARGETARCH}.tar.gz" && \
+#     tar -xzf subnet-evm.tar.gz -C /subnet-evm
 
 # ==============================================================================
 # FINAL STAGE
@@ -30,13 +30,7 @@ RUN echo "Downloading subnet-evm version ${SUBNETEVM_VERSION} for ${TARGETARCH}"
 FROM debian:bookworm-slim
 
 COPY --from=avalanchego /avalanchego/build/avalanchego /usr/local/bin/avalanchego
-COPY --from=subevm_builder /subnet-evm/subnet-evm /plugins/pJhESDWpZttEG5zDJpoZWR14EsYdZw8JNc2xReUF35cQJCgAy
-
-ARG BLOCKCHAIN_ID
-
-# Create directory and copy config folder
-RUN mkdir -p /config
-COPY ./config /config/${BLOCKCHAIN_ID}
+# COPY --from=subevm_builder /subnet-evm/subnet-evm /plugins/pJhESDWpZttEG5zDJpoZWR14EsYdZw8JNc2xReUF35cQJCgAy
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

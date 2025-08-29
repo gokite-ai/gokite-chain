@@ -2,17 +2,17 @@
 
 set -euo pipefail
 
-AVALANCHEGO_DATA_DIR=${AVALANCHEGO_DATA_DIR:-$HOME/.avalanchego}
+AVAGO_DATA_DIR=${AVAGO_DATA_DIR:-$HOME/.avalanchego}
 
 # Set default plugin dir if not set
-if [ -z "${AVALANCHEGO_PLUGIN_DIR:-}" ]; then
-    export AVALANCHEGO_PLUGIN_DIR="/plugins/"
-fi
+# if [ -z "${AVAGO_PLUGIN_DIR:-}" ]; then
+#     export AVAGO_PLUGIN_DIR="/plugins/"
+# fi
 
 # Write BLS key if provided
 if [ -n "${BLS_KEY_BASE64:-}" ]; then
-    mkdir -p "$AVALANCHEGO_DATA_DIR/staking"
-    echo "$BLS_KEY_BASE64" | base64 -d > "$AVALANCHEGO_DATA_DIR/staking/signer.key"
+    mkdir -p "$AVAGO_DATA_DIR/staking"
+    echo "$BLS_KEY_BASE64" | base64 -d > "$AVAGO_DATA_DIR/staking/signer.key"
 fi
 
 
@@ -23,8 +23,8 @@ get_avalanchego_flags() {
     while IFS= read -r line; do
         name="${line%%=*}"
         value="${line#*=}"
-        if [[ $name == AVALANCHEGO_* ]]; then
-            flag_name=$(echo "${name#AVALANCHEGO_}" | tr '[:upper:]' '[:lower:]' | tr '_' '-')
+        if [[ $name == AVAGO_* ]]; then
+            flag_name=$(echo "${name#AVAGO_}" | tr '[:upper:]' '[:lower:]' | tr '_' '-')
             flags+="--$flag_name=$value "
         fi
     done < <(env)
