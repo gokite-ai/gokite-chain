@@ -25,3 +25,4 @@ services:
       # - KITE_CHAIN_ID=nQ9iPT7ZQQx1qwBTs68EGiU8cu1GHMMjzvYktmA3oRs4esg3V
       # - AVAGO_PLUGIN_DIR=/plugins
       # - AVAGO_TRACK_SUBNETS=
+      - PLUGIN_ID=pJhESDWpZttEG5zDJpoZWR14EsYdZw8JNc2xReUF35cQJCgAy
