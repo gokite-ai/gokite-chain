@@ -13,13 +13,25 @@ fi
 if [ -n "${BLS_KEY_BASE64:-}" ]; then
     mkdir -p "$AVAGO_DATA_DIR/staking"
     echo "$BLS_KEY_BASE64" | base64 -d > "$AVAGO_DATA_DIR/staking/signer.key"
+    unset BLS_KEY_BASE64
 fi
 
+# Write TLS key and cert if provided
+if [ -n "${AVAGO_STAKING_TLS_KEY_FILE_CONTENT:-}" ]; then
+    mkdir -p "$AVAGO_DATA_DIR/staking"
+    echo "$AVAGO_STAKING_TLS_KEY_FILE_CONTENT" | base64 -d > "$AVAGO_DATA_DIR/staking/staker.key"
+    unset AVAGO_STAKING_TLS_KEY_FILE_CONTENT
+fi
+if [ -n "${AVAGO_STAKING_TLS_CERT_FILE_CONTENT:-}" ]; then
+    mkdir -p "$AVAGO_DATA_DIR/staking"
+    echo "$AVAGO_STAKING_TLS_CERT_FILE_CONTENT" | base64 -d > "$AVAGO_DATA_DIR/staking/staker.crt"
+    unset AVAGO_STAKING_TLS_CERT_FILE_CONTENT
+fi
 
 
 # If PLUGIN_ID is provided, ensure plugin dir exists by copying subnet-evm
 if [ -n "${PLUGIN_ID:-}" ]; then
-    SRC_PLUGIN_FILE="${AVAGO_PLUGIN_DIR%/}/subnet-evm"
+    SRC_PLUGIN_FILE="/plugins-template/subnet-evm"
     DEST_PLUGIN_FILE="${AVAGO_PLUGIN_DIR%/}/${PLUGIN_ID}"
     if [ -f "$SRC_PLUGIN_FILE" ]; then
         if [ ! -e "$DEST_PLUGIN_FILE" ]; then
@@ -49,7 +61,6 @@ get_avalanchego_flags() {
 }
 
 EXTRA_FLAGS=$(get_avalanchego_flags)
-echo "Extra flags: $EXTRA_FLAGS"
 
 # Launch avalanchego with dynamic flags
 /usr/local/bin/avalanchego $EXTRA_FLAGS
