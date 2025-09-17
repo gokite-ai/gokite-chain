@@ -1,0 +1,91 @@
+[
+    {
+      "NodeID": "NodeID-5Mt5MYRMkvBU15ufzcn5aJLqzy73C2Fkk",
+      "Weight": 1000000,
+      "Balance": 100000000,
+      "BLSPublicKey": "0x8f14914e3ee1b82d388d5cc9cb6a4b23d04b864993ff35106ef8f8dd9067eb013b324cba915f4d5ae8e795bf74f871a0",
+      "BLSProofOfPossession": "0x92b9607ccfca1aee54b5cbadceba62431ba2863aa759bacbbb7c1f1d7c5c0594a9a87ae9cd223f432977a5416f22a8e10c7012f66bd25a9441a7f17b6a56e100ede60323c32b7d0dd7f9041b9aca9d11b0c8ebfc6a290a2a24014f29a32d9033",
+      "ChangeOwnerAddr": "P-avax15ajsu3hm5xf7pdfz2nwyam5x6jnhhneafw96pe"
+    },
+    {
+      "NodeID": "NodeID-8PjZ85KBZvfyaAwgLQPp9so38mQ1qKzwL",
+      "Weight": 1000000,
+      "Balance": 100000000,
+      "BLSPublicKey": "0x812560a190100803fd9af910dc7a9cf45f20812ca131ccdcf56a3009bb34a9a2f32a0ee630c73e44bfd6e80cfbc9349b",
+      "BLSProofOfPossession": "0xaae39d38cb259530a8fbc47796ced5a77ccdef910650a44be34208da48080aa7cae97b17331351a2c0891e5791cdf8911057cceb4acd9f8872d3a33e91df7bad90b0082bb2ea4600cc5527e1803386932b7c06362ffff66332d619564b6f6c44",
+      "ChangeOwnerAddr": "P-avax15ajsu3hm5xf7pdfz2nwyam5x6jnhhneafw96pe"
+    },
+    {
+      "NodeID": "NodeID-J8QR61zynrQFkMfteke9bAu9vZ72nr8Zn",
+      "Weight": 1000000,
+      "Balance": 100000000,
+      "BLSPublicKey": "0x812036c18facf21292d6216e94d6c852aa4b7f72854af4fb047099d437b139d66b78b7b33e634e0e081507a050bcadc9",
+      "BLSProofOfPossession": "0xb602b56f799417d3420ef9b03940dc00f69275617a4435eecb80e5ebaa969bc3a61377f5385ce17753f6e8c51f5dd8290bfb0e7785a46f557bedf77e8408379fe6edccbab6cf9aa279b65a7943a48a46b09a61088c4b1f1ee5779789e4f0c0c5",
+      "ChangeOwnerAddr": "P-avax15ajsu3hm5xf7pdfz2nwyam5x6jnhhneafw96pe"
+    },
+    {
+      "NodeID": "NodeID-5kkerDvHNCJt9Ct2VBq4C5SYrwcfoCmYF",
+      "Weight": 1000000,
+      "Balance": 100000000,
+      "BLSPublicKey": "0xa244397b3de5e108a29fd296326cdebca8b21bc56e92ddd886b7f1edc2804159745aeb49aa88cb4feeeb0c2242bba58b",
+      "BLSProofOfPossession": "0xa9b8e883db0fd1eb7ca400149e6b3ac21dc45270478a66a9605b0ec38ffa34e685e769d1873cd19d6cbbcaf1f73e2d7b084cfbef51c98b05ab380bc3e404e35fbf37183f5868c51c83ad2def399b9c07c951d312d1e813a3d6583ef00f5783c4",
+      "ChangeOwnerAddr": "P-avax15ajsu3hm5xf7pdfz2nwyam5x6jnhhneafw96pe"
+    },
+    {
+      "NodeID": "NodeID-APEm6yckz8hCBofDa9unQ1e4NiDXPpCZq",
+      "Weight": 1000000,
+      "Balance": 100000000,
+      "BLSPublicKey": "0x9752d79aba0152c15bb6d8cf0bf20b205c3540eec69d4bca7306c1b6b1a7c56f705bde4180e4a4973f9fcb7f209c1cff",
+      "BLSProofOfPossession": "0xb5801f55979a8ca7a319843a3af1f5b82a999f19e3bf0384e02c5f32bce7528d776e3e381e7e9f6a2b56c29c0b74680809f31b60bafb0cc82a4077dccd1743d60752aa0462695ae3baec2985e8cf53e814ff35c5494d2ae8bfed18bc70e7e371",
+      "ChangeOwnerAddr": "P-avax15ajsu3hm5xf7pdfz2nwyam5x6jnhhneafw96pe"
+    },
+    {
+      "NodeID": "NodeID-7u49rXgYi8LEm2Duv8v9pSHE2hANWDe5H",
+      "Weight": 1000000,
+      "Balance": 100000000,
+      "BLSPublicKey": "0xacfca220e6688e25e0f1d67092a0146b59ed6d1af35bdf72bd955ea022acbd28ce3ab91e2d05103a5d059c095e6e4206",
+      "BLSProofOfPossession": "0x961c6367faf5f11424d92d4373c6b37f02989d973d96d607658d7e9833afc336205cc3e1e6d909a59bc7eb567af6ceb8148341b767adec389fbe12a2ecdee8ca23fa3630d16ec199c2b802b756607e9ffb02d73b3e0b4db40259e2a003832ab2",
+      "ChangeOwnerAddr": "P-avax15ajsu3hm5xf7pdfz2nwyam5x6jnhhneafw96pe"
+    },
+    {
+      "NodeID": "NodeID-M9XKnSnzVDbzMMKXBgradzdPD8bWq3HtD",
+      "Weight": 1000000,
+      "Balance": 100000000,
+      "BLSPublicKey": "0x9834653e37d783c504a379ad943b0dbf70db0bb231a5355d5f8afa8c90e5792cdf3e485a4728761d4d7d322deec761f8",
+      "BLSProofOfPossession": "0xb5264b549216c8742cad003856db4033cb1df4b382be0445d58634c90c5ca3b90a8bc6538de8348f8cdbf917658b25820fe1e60ad3c099b81984f6811eecb892279db62a540c8a457cd773d9be821fdaa4d07d27353d2591500c0c812e51d204",
+      "ChangeOwnerAddr": "P-avax15ajsu3hm5xf7pdfz2nwyam5x6jnhhneafw96pe"
+    },
+    {
+      "NodeID": "NodeID-4K49PGQkZ43GrugbDPfNkTE9x3CtnBMy1",
+      "Weight": 1000000,
+      "Balance": 100000000,
+      "BLSPublicKey": "0x8743ed3e9bc94c6ba33b8b67f8ceb5a00ae9d2015069e0613e07cda1d9ac95fe44370b4b3eb564d501e80db488f52ec8",
+      "BLSProofOfPossession": "0x8019d4520332572b7740237f3336ba49e6a22171299a49b02be3902326668cfbd03f00d15211e1295591823e7699ea6c09635f7d8c32c201552995c9c686d7b330d2fc96a281277141dd0183fb08f4c44f8fc241370b4108c1f65fa80b101062",
+      "ChangeOwnerAddr": "P-avax15ajsu3hm5xf7pdfz2nwyam5x6jnhhneafw96pe"
+    },
+    {
+      "NodeID": "NodeID-AoHKAxMzBRMBkCGHjSSCBUnDh5VXx2p3U",
+      "Weight": 1000000,
+      "Balance": 100000000,
+      "BLSPublicKey": "0xa2fd3eeb4df043a22a71a0921174ed50d1ab260c4dc89901046a0e306c25fe8d88bd969bd340c88ebae6395691a02346",
+      "BLSProofOfPossession": "0xaaa7b6df901de629bdfbdee0edeb37327f57b57fc6d35714383abae85518bd9b7978d6ba8f0dd4371242955dac8061830f1f89fbe816d7ed6bde28e1875e1ac1cf613154aad9823f540e204ac9d9c1d8af56c37a4f7ae15d11893590314aebf4",
+      "ChangeOwnerAddr": "P-avax15ajsu3hm5xf7pdfz2nwyam5x6jnhhneafw96pe"
+    },
+    {
+      "NodeID": "NodeID-FnCPgcKJVXgfwX5W7yPgvHYsVQSzXCpPg",
+      "Weight": 1000000,
+      "Balance": 100000000,
+      "BLSPublicKey": "0x802bb78fefc4724ed7dd2ea38596ec698b10bd9e757c66e6ee495649a591d958ab1d03289d8028b82509a28c6ed7a101",
+      "BLSProofOfPossession": "0xb9805ad4d2cc9fa94d5a990071d8c10c82de9cdc9d9c8146154d4614809991965001ec1c82ae7925e61f543be990424e129a1f992269ed2f55b8fbc48a9d13d9f6b19e4c6f11839ce9c9ae045117588e992376040f1ed70a4e49e6344e3c83b6",
+      "ChangeOwnerAddr": "P-avax15ajsu3hm5xf7pdfz2nwyam5x6jnhhneafw96pe"
+    },
+    {
+      "NodeID": "NodeID-J8QR61zynrQFkMfteke9bAu9vZ72nr8Zn",
+      "Weight": 1000000,
+      "Balance": 100000000,
+      "BLSPublicKey": "0x812036c18facf21292d6216e94d6c852aa4b7f72854af4fb047099d437b139d66b78b7b33e634e0e081507a050bcadc9",
+      "BLSProofOfPossession": "0xb602b56f799417d3420ef9b03940dc00f69275617a4435eecb80e5ebaa969bc3a61377f5385ce17753f6e8c51f5dd8290bfb0e7785a46f557bedf77e8408379fe6edccbab6cf9aa279b65a7943a48a46b09a61088c4b1f1ee5779789e4f0c0c5",
+      "ChangeOwnerAddr": "P-avax15ajsu3hm5xf7pdfz2nwyam5x6jnhhneafw96pe"
+    }
+  ]
+  
