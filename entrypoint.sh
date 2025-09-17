@@ -19,7 +19,7 @@ fi
 
 # If PLUGIN_ID is provided, ensure plugin dir exists by copying subnet-evm
 if [ -n "${PLUGIN_ID:-}" ]; then
-    SRC_PLUGIN_FILE="${AVAGO_PLUGIN_DIR%/}/subnet-evm"
+    SRC_PLUGIN_FILE="/plugins-template/subnet-evm"
     DEST_PLUGIN_FILE="${AVAGO_PLUGIN_DIR%/}/${PLUGIN_ID}"
     if [ -f "$SRC_PLUGIN_FILE" ]; then
         if [ ! -e "$DEST_PLUGIN_FILE" ]; then
@@ -49,7 +49,6 @@ get_avalanchego_flags() {
 }
 
 EXTRA_FLAGS=$(get_avalanchego_flags)
-echo "Extra flags: $EXTRA_FLAGS"
 
 # Launch avalanchego with dynamic flags
 /usr/local/bin/avalanchego $EXTRA_FLAGS
