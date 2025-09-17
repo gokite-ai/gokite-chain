@@ -6,13 +6,13 @@ deployment results
 +-------------------------------------------------------------------+
 |                         DEPLOYMENT RESULTS                        |
 +---------------+---------------------------------------------------+
-| Chain Name    | km1                                               |
+| Chain Name    | km2                                               |
 +---------------+---------------------------------------------------+
-| Subnet ID     | FyZLuWtzLkzwAANsDJ3yYXkXJmYPetiESLBDXj69a8rL3cZVC |
+| Subnet ID     | Eu2nGvNwpr9n5rXN4Zsv6C5iPw24rWbTz2Tisdo3Jhtog9Dzd |
 +---------------+---------------------------------------------------+
-| VM ID         | pK4rhvf6whAzf8KJzTEvx5Kghaw9z31VBQdmnFr1JDX7TFJjc |
+| VM ID         | pK4t1ySBpm7SENQ5iUMPtEF8b7SVW1SDv7uqz4tCYZLV17Z9P |
 +---------------+---------------------------------------------------+
-| Blockchain ID | NtnfgrLFmvJ3WBqbtTTC1sVrP88T5nMRtwTohcj3UgvU8czWr |
+| Blockchain ID | XhmBdBFhFrsLeUnjrNkPu7ptUs8w5HYVkxN7XvETmtJYZWEVw |
 +---------------+                                                   |
 | P-Chain TXID  |                                                   |
 +---------------+---------------------------------------------------+
