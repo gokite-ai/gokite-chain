@@ -1,1 +1,12 @@
-/data/*
+# env
+.env
+
+
+# local data & logs
+/data/
+logs/
+
+
+# OS cruft
+.DS_Store
+Thumbs.db
