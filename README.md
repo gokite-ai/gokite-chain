@@ -96,6 +96,6 @@ If you are running the node for validator, you may want to generate the keys man
 
 ## Run the Node Manually
 
-All the configurations and commands to build the docker image are in the this repository.
+All the configurations and commands to build the docker image are in this repository.
 
-If you want to run the node manually without using docker, feel free to check github actions to see how to build and run the node.
+If you want to run the node manually without using docker, feel free to check GitHub Actions to see how to build and run the node.
