@@ -44,8 +44,8 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           build-args: |
-            AVALANCHEGO_VERSION=1.13.0-fuji_kite2
-            SUBNETEVM_VERSION=0.7.3
+            AVALANCHEGO_VERSION=v1.14.0-fuji-kite
+            SUBNETEVM_VERSION=v0.8.0-fuji-kite1
             BLOCKCHAIN_ID=nQ9iPT7ZQQx1qwBTs68EGiU8cu1GHMMjzvYktmA3oRs4esg3V
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.RELEASE_VERSION }}
@@ -63,8 +63,8 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           build-args: |
-            AVALANCHEGO_VERSION=1.13.0-fuji_kite2
-            SUBNETEVM_VERSION=0.7.3
+            AVALANCHEGO_VERSION=v1.14.0-fuji-kite
+            SUBNETEVM_VERSION=v0.8.0-fuji-kite1
             BLOCKCHAIN_ID=nQ9iPT7ZQQx1qwBTs68EGiU8cu1GHMMjzvYktmA3oRs4esg3V
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.RELEASE_VERSION }}-archive
