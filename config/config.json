@@ -2,6 +2,7 @@
   "database-type": "leveldb",
   "log-level": "info",
   "warp-api-enabled": true,
+  "state-sync-enabled": true,
   "eth-apis": [
     "eth",
     "eth-filter",
