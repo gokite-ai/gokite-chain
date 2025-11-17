@@ -44,7 +44,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           build-args: |
-            AVALANCHEGO_VERSION=1.14.0-fuji-kite
+            AVALANCHEGO_VERSION=1.14.0-fuji-l1-backport-rc.0-kite
             SUBNETEVM_VERSION=0.8.0-fuji-kite1
             BLOCKCHAIN_ID=nQ9iPT7ZQQx1qwBTs68EGiU8cu1GHMMjzvYktmA3oRs4esg3V
           tags: |
@@ -63,7 +63,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           build-args: |
-            AVALANCHEGO_VERSION=1.14.0-fuji-kite
+            AVALANCHEGO_VERSION=1.14.0-fuji-l1-backport-rc.0-kite
             SUBNETEVM_VERSION=0.8.0-fuji-kite1
             BLOCKCHAIN_ID=nQ9iPT7ZQQx1qwBTs68EGiU8cu1GHMMjzvYktmA3oRs4esg3V
           tags: |
