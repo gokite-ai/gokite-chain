@@ -3,6 +3,7 @@
   "log-level": "info",
   "warp-api-enabled": true,
   "state-sync-enabled": true,
+  "rpc-gas-cap": 400000000,
   "eth-apis": [
     "eth",
     "eth-filter",
