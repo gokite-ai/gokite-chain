@@ -63,4 +63,4 @@ get_avalanchego_flags() {
 EXTRA_FLAGS=$(get_avalanchego_flags)
 
 # Launch avalanchego with dynamic flags
-/usr/local/bin/avalanchego $EXTRA_FLAGS
+exec /usr/local/bin/avalanchego $EXTRA_FLAGS
