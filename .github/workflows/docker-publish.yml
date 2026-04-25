@@ -44,8 +44,8 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           build-args: |
-            AVALANCHEGO_VERSION=1.14.2-kite-rc.2
-            SUBNETEVM_VERSION=1.14.2-kite-rc.2
+            AVALANCHEGO_VERSION=1.14.2-kite-rc.3
+            SUBNETEVM_VERSION=1.14.2-kite-rc.3
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.RELEASE_VERSION }}
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
