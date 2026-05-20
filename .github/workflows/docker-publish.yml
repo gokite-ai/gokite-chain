@@ -1,15 +1,19 @@
 name: Docker Build and Publish
 
 on:
-  push:
-    tags: [ 'v*.*.*' ]
+  release:
+    types: [published]
 
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: gokite-ai/gokite-chain
+  AVALANCHEGO_VERSION: 1.14.2-kite-rc.3
+  SUBNETEVM_VERSION: 1.14.2-kite-rc.3
 
 jobs:
-  build-and-push:
+  publish-latest-release:
+    name: Publish latest release
+    if: ${{ !github.event.release.prerelease }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -17,12 +21,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Set env
-        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-      - name: Test
-        run: |
-          echo $RELEASE_VERSION
-          echo ${{ env.RELEASE_VERSION }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -44,8 +42,44 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           build-args: |
-            AVALANCHEGO_VERSION=1.14.2-kite-rc.3
-            SUBNETEVM_VERSION=1.14.2-kite-rc.3
+            AVALANCHEGO_VERSION=${{ env.AVALANCHEGO_VERSION }}
+            SUBNETEVM_VERSION=${{ env.SUBNETEVM_VERSION }}
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.RELEASE_VERSION }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.release.tag_name }}
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+  publish-prerelease:
+    name: Publish prerelease
+    if: ${{ github.event.release.prerelease }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Node Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          build-args: |
+            AVALANCHEGO_VERSION=${{ env.AVALANCHEGO_VERSION }}
+            SUBNETEVM_VERSION=${{ env.SUBNETEVM_VERSION }}
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.release.tag_name }}
