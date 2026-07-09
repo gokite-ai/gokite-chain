@@ -36,10 +36,13 @@ jobs:
 
       - name: Determine image tag and commit sha
         id: vars
+        env:
+          INPUT_REF: ${{ github.event.inputs.ref }}
+          INPUT_IMAGE_TAG: ${{ github.event.inputs.image_tag }}
         run: |
-          IMAGE_TAG="${{ github.event.inputs.image_tag }}"
+          IMAGE_TAG="$INPUT_IMAGE_TAG"
           if [ -z "$IMAGE_TAG" ]; then
-            IMAGE_TAG=$(echo "${{ github.event.inputs.ref }}" | sed 's/[^a-zA-Z0-9._-]/-/g')
+            IMAGE_TAG=$(echo "$INPUT_REF" | sed 's/[^a-zA-Z0-9._-]/-/g')
           fi
           SHORT_SHA=$(git rev-parse --short=8 HEAD)
 
