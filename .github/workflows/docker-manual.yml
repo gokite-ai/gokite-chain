@@ -1,0 +1,73 @@
+name: Docker Build and Publish (Manual)
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Branch or tag to build'
+        required: true
+        type: string
+      image_tag:
+        description: 'Tag to publish image as (defaults to ref name if empty)'
+        required: false
+        type: string
+      push_latest:
+        description: 'Also tag as latest'
+        required: false
+        type: boolean
+        default: false
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: gokite-ai/gokite-chain
+  AVALANCHEGO_VERSION: 1.14.2-kite-rc.3
+  SUBNETEVM_VERSION: 1.14.2-kite-rc.3
+
+jobs:
+  publish-manual:
+    name: Publish manual build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.ref }}
+
+      - name: Determine image tag and commit sha
+        id: vars
+        run: |
+          IMAGE_TAG="${{ github.event.inputs.image_tag }}"
+          if [ -z "$IMAGE_TAG" ]; then
+            IMAGE_TAG=$(echo "${{ github.event.inputs.ref }}" | sed 's/[^a-zA-Z0-9._-]/-/g')
+          fi
+          SHORT_SHA=$(git rev-parse --short=8 HEAD)
+
+          echo "image_tag=$IMAGE_TAG" >> "$GITHUB_OUTPUT"
+          echo "short_sha=$SHORT_SHA" >> "$GITHUB_OUTPUT"
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Node Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          build-args: |
+            AVALANCHEGO_VERSION=${{ env.AVALANCHEGO_VERSION }}
+            SUBNETEVM_VERSION=${{ env.SUBNETEVM_VERSION }}
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.image_tag }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.image_tag }}-${{ steps.vars.outputs.short_sha }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.short_sha }}
+            ${{ github.event.inputs.push_latest == 'true' && format('{0}/{1}:latest', env.REGISTRY, env.IMAGE_NAME) || '' }}
