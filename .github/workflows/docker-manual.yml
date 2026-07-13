@@ -19,7 +19,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: gokite-ai/gokite-chain
-  AVALANCHEGO_VERSION: 1.14.2-kite-rc.3
+  AVALANCHEGO_VERSION: 7c6aba88
   SUBNETEVM_VERSION: 1.14.2-kite-rc.3
 
 jobs:
