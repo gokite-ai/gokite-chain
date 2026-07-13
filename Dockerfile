@@ -7,13 +7,13 @@
 ARG AVALANCHEGO_VERSION
 ARG SUBNETEVM_VERSION
 
-FROM ghcr.io/gokite-ai/avalanchego:v${AVALANCHEGO_VERSION} AS avalanchego
+FROM ghcr.io/gokite-ai/avalanchego:${AVALANCHEGO_VERSION} AS avalanchego
 
 # ==============================================================================
 # SUBNET-EVM STAGE
 # Imports the Subnet-EVM plugin from the merged AvalancheGo release image
 # ==============================================================================
-FROM ghcr.io/gokite-ai/subnet-evm:v${SUBNETEVM_VERSION} AS subnetevm
+FROM ghcr.io/gokite-ai/subnet-evm:${SUBNETEVM_VERSION} AS subnetevm
 
 # ==============================================================================
 # FINAL STAGE
