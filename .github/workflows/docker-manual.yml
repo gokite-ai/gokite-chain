@@ -15,12 +15,20 @@ on:
         required: false
         type: boolean
         default: false
+      avalanchego_version:
+        description: 'AvalancheGo version to build'
+        required: true
+        type: string
+      subnetevm_version:
+        description: 'SubnetEVM version to build'
+        required: true
+        type: string
 
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: gokite-ai/gokite-chain
-  AVALANCHEGO_VERSION: 1.14.2-kite-rc.3
-  SUBNETEVM_VERSION: 1.14.2-kite-rc.3
+  AVALANCHEGO_VERSION: ${{ github.event.inputs.avalanchego_version }}
+  SUBNETEVM_VERSION: ${{ github.event.inputs.subnetevm_version }}
 
 jobs:
   publish-manual:
