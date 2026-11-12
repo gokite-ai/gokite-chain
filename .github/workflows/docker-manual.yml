@@ -16,13 +16,18 @@ on:
         type: boolean
         default: false
       avalanchego_version:
-        description: 'AvalancheGo version to build'
-        required: true
+        description: 'AvalancheGo image version (required for a component build)'
+        required: false
         type: string
       subnetevm_version:
-        description: 'SubnetEVM version to build'
-        required: true
+        description: 'Subnet-EVM image version (required for a component build)'
+        required: false
         type: string
+
+      testnet_candidate:
+        description: 'Build the pinned amd64 testnet client pair and publish a unique candidate tag'
+        type: boolean
+        default: false
 
 env:
   REGISTRY: ghcr.io
@@ -32,12 +37,15 @@ env:
 
 jobs:
   publish-manual:
+    if: ${{ !inputs.testnet_candidate }}
     name: Publish manual build
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
     steps:
+      - name: Check component versions
+        run: test -n "$AVALANCHEGO_VERSION" && test -n "$SUBNETEVM_VERSION"
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.inputs.ref }}
@@ -50,7 +58,7 @@ jobs:
         run: |
           IMAGE_TAG="$INPUT_IMAGE_TAG"
           if [ -z "$IMAGE_TAG" ]; then
-            IMAGE_TAG=$(echo "$INPUT_REF" | sed 's/[^a-zA-Z0-9._-]/-/g')
+            IMAGE_TAG=${INPUT_REF//[^a-zA-Z0-9._-]/-}
           fi
           SHORT_SHA=$(git rev-parse --short=8 HEAD)
 
@@ -82,3 +90,125 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.image_tag }}-${{ steps.vars.outputs.short_sha }}
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.short_sha }}
             ${{ github.event.inputs.push_latest == 'true' && format('{0}/{1}:latest', env.REGISTRY, env.IMAGE_NAME) || '' }}
+
+  build-testnet-candidate:
+    if: inputs.testnet_candidate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    outputs:
+      build_id: ${{ steps.inputs.outputs.build_id }}
+    permissions:
+      contents: read
+    env:
+      CLIENT_COMMIT: feb74bb1ddb6aab349536698baebe1ffdad3af5c
+    steps:
+      - name: Check candidate inputs
+        id: inputs
+        env:
+          REQUESTED_REF: ${{ inputs.ref }}
+          IMAGE_TAG: ${{ inputs.image_tag }}
+          PUSH_LATEST: ${{ inputs.push_latest }}
+        run: |
+          set -euo pipefail
+          test "$REQUESTED_REF" = "$GITHUB_SHA"
+          test "$PUSH_LATEST" = false
+          test -z "$IMAGE_TAG$AVALANCHEGO_VERSION$SUBNETEVM_VERSION"
+          echo "build_id=$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT" >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: gokite-ai/avalanchego
+          ref: ${{ env.CLIENT_COMMIT }}
+          path: candidate-src
+          persist-credentials: false
+      - uses: actions/setup-go@924ae3a1cded613372ab5595356fb5720e22ba16 # v6
+        with:
+          go-version-file: candidate-src/go.mod
+          cache: false
+      - name: Verify source and build the pair
+        working-directory: candidate-src
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$CLIENT_COMMIT"
+          gh api "repos/gokite-ai/avalanchego/commits/$CLIENT_COMMIT" |
+            jq -e --arg sha "$CLIENT_COMMIT" '.sha == $sha and .commit.verification.verified'
+          PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s scripts/candidate
+          bash scripts/build_candidate_pair.sh "$RUNNER_TEMP/evidence"
+      - name: Assemble and verify the testnet runtime
+        run: |
+          set -euo pipefail
+          dir="$RUNNER_TEMP/runtime"
+          mkdir "$dir"
+          cp entrypoint.sh Dockerfile.testnet-candidate "$dir/"
+          image="rpc3-candidate:$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          pair="qa53-candidate:$CLIENT_COMMIT"
+          docker buildx build --builder default --load --platform linux/amd64 --network none \
+            --build-arg "PAIR_IMAGE=$pair" --build-arg "RUNTIME_BASE=$(cat "$RUNNER_TEMP/evidence/runtime-base.txt")" \
+            -f "$dir/Dockerfile.testnet-candidate" -t "$image" "$dir"
+          run=(docker run --rm --platform linux/amd64 --pull never --network none --cap-drop ALL --security-opt no-new-privileges)
+          bins=(/usr/local/bin/avalanchego /plugins-template/subnet-evm)
+          "${run[@]}" --read-only --entrypoint sha256sum "$pair" "${bins[@]}" > "$RUNNER_TEMP/evidence/pair.sha256"
+          "${run[@]}" --read-only --entrypoint sha256sum "$image" "${bins[@]}" > "$RUNNER_TEMP/evidence/runtime.sha256"
+          cmp "$RUNNER_TEMP/evidence/pair.sha256" "$RUNNER_TEMP/evidence/runtime.sha256"
+          # The inner shell expands PLUGIN_ID in the container.
+          # shellcheck disable=SC2016
+          "${run[@]}" -e AVAGO_VERSION=true -e PLUGIN_ID=pJhESDWpZttEG5zDJpoZWR14EsYdZw8JNc2xReUF35cQJCgAy \
+            --entrypoint bash "$image" -euo pipefail -c '
+              hash=$(sha256sum /plugins-template/subnet-evm | cut -d" " -f1)
+              /entrypoint.sh
+              printf "%s  %s\n" "$hash" "/plugins/$PLUGIN_ID" | sha256sum -c -
+              "/plugins/$PLUGIN_ID" --version
+            '
+          docker save -o "$RUNNER_TEMP/rpc3-candidate.tar" "$image"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: testnet-runtime-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/rpc3-candidate.tar
+            ${{ runner.temp }}/evidence/*.txt
+            ${{ runner.temp }}/evidence/*.sha256
+            ${{ runner.temp }}/evidence/verification.json
+          if-no-files-found: error
+          retention-days: 3
+          compression-level: 0
+
+  publish-testnet-candidate:
+    needs: build-testnet-candidate
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: testnet-runtime-${{ needs.build-testnet-candidate.outputs.build_id }}
+          path: ${{ runner.temp }}/candidate
+      - uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish the verified image and pull it by digest
+        env:
+          BUILD_ID: ${{ needs.build-testnet-candidate.outputs.build_id }}
+        working-directory: ${{ runner.temp }}/candidate
+        run: |
+          set -euo pipefail
+          local_tag="rpc3-candidate:$BUILD_ID"
+          repository="$REGISTRY/$IMAGE_NAME"
+          remote_tag="$repository:rpc3-candidate-$BUILD_ID"
+          docker load -i rpc3-candidate.tar
+          docker tag "$local_tag" "$remote_tag"
+          docker push "$remote_tag"
+          digest=$(docker buildx imagetools inspect --raw "$remote_tag" | sha256sum | cut -d' ' -f1)
+          pinned="$repository@sha256:$digest"
+          docker pull --platform linux/amd64 "$pinned"
+          docker run --rm --pull never --network none --read-only --cap-drop ALL --security-opt no-new-privileges \
+            --entrypoint sha256sum "$pinned" /usr/local/bin/avalanchego /plugins-template/subnet-evm > pulled.sha256
+          cmp evidence/runtime.sha256 pulled.sha256
+          printf 'Verified linux/amd64 candidate: %s\n' "$pinned" >> "$GITHUB_STEP_SUMMARY"
+          echo "Verified candidate $pinned"

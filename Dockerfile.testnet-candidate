@@ -1,0 +1,9 @@
+ARG PAIR_IMAGE
+ARG RUNTIME_BASE
+FROM ${PAIR_IMAGE} AS pair
+FROM ${RUNTIME_BASE}
+COPY --from=pair /usr/local/bin/avalanchego /usr/local/bin/avalanchego
+RUN mkdir -p /plugins /plugins-template
+COPY --from=pair /plugins-template/subnet-evm /plugins-template/subnet-evm
+COPY --chmod=755 entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
